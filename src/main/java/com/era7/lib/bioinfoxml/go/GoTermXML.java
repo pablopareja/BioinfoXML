@@ -1,0 +1,207 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.era7.lib.bioinfoxml.go;
+
+import com.era7.lib.era7xmlapi.model.XMLElement;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import org.jdom.Document;
+import org.jdom.Element;
+import org.jdom.input.SAXBuilder;
+
+/**
+ *
+ * @author Pablo Pareja Tobes
+ */
+public class GoTermXML extends XMLElement implements Comparable<GoTermXML> {
+
+    public static String GO_TERM_SERVICE_URL = "http://www.ebi.ac.uk/QuickGO/GTerm?format=oboxml&id=";
+
+    public static final String TAG_NAME = "go_term";
+
+    public static final String ASPECT_FUNCTION = "molecular_function";
+    public static final String ASPECT_FUNCTION_GO_TERM = "GO:0003674";
+    public static final String ASPECT_COMPONENT = "cellular_component";
+    public static final String ASPECT_COMPONENT_GO_TERM = "GO:0005575";
+    public static final String ASPECT_PROCESS = "biological_process";
+    public static final String ASPECT_PROCESS_GO_TERM = "GO:0008150";
+
+    public static final String DATE_TAG_NAME = "date";
+    public static final String ID_TAG_NAME = "id";
+    public static final String DEFINITION_TAG_NAME = "definition";
+    public static final String NAME_TAG_NAME = "name";
+    public static final String REFERENCE_TAG_NAME = "reference";
+    public static final String EVIDENCE_TAG_NAME = "evidence";
+    public static final String WITH_TAG_NAME = "with";
+    public static final String ASPECT_TAG_NAME = "aspect";
+    public static final String SOURCE_TAG_NAME = "source";
+    public static final String ANNOTATIONS_COUNT_TAG_NAME = "annotations_count";
+
+    public GoTermXML() {
+        super(new Element(TAG_NAME));
+    }
+
+    public GoTermXML(String value) throws Exception {
+        super(value);
+    }
+
+    public GoTermXML(Element element) {
+        super(element);
+    }
+
+    public static GoTermXML getGoTerm(String id) throws Exception{
+
+        GoTermXML temp = new GoTermXML();
+
+        URL url = new URL(GO_TERM_SERVICE_URL + id);
+        // Connect
+        HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+        // Get data
+        SAXBuilder saxBuilder = new SAXBuilder();
+        Document doc = saxBuilder.build(urlConnection.getInputStream());
+
+        Element termElement = doc.getRootElement().getChild("term");
+
+        String idString,nameString,defString;
+        idString = termElement.getChildText("id");
+        nameString = termElement.getChildText("name");
+        defString = termElement.getChild("def").getChildText("defstr");
+
+        if(!id.equals(idString)){
+            throw new Exception("El id proporcionado y el encontrado en el xml proporcionado por el servicio no son el mismo");
+        }else{
+            temp.setId(idString);
+            temp.setGoName(nameString);
+            temp.setDefinition(defString);
+        }
+        
+        return temp;
+    }
+
+    public static String transformIdToGoOfficialSyntax(String temp){
+        if(temp.indexOf("GO:") < 0){
+            int digits = temp.length();
+            StringBuffer buffer = new StringBuffer(9);
+            buffer.append("GO:");
+            for (int i = 0; i < 7-digits; i++) {
+                buffer.append("0");
+            }
+            buffer.append(temp);
+            return buffer.toString();
+        }else{
+            return temp;
+        }
+    }
+
+    public void transformIdToGoOfficialSyntax(){
+        String temp = getId();
+        if(temp.indexOf("GO:") < 0){
+            int digits = temp.length();
+            StringBuffer buffer = new StringBuffer(9);
+            buffer.append("GO:");
+            for (int i = 0; i < 7-digits; i++) {
+                buffer.append("0");
+            }
+            buffer.append(temp);
+            setId(buffer.toString());
+        }
+    }
+    public void transformIdToDBSyntax(){
+        String temp = getId();
+        int tempId = Integer.parseInt(temp.replaceFirst("GO:", ""));
+        setId(String.valueOf(tempId));
+    }
+
+    //----------------SETTERS-------------------
+    public void setAnnotationsCount(int value){
+        setNodeText(ANNOTATIONS_COUNT_TAG_NAME, String.valueOf(value));
+    }
+    public void setDate(String value) {
+        setNodeText(DATE_TAG_NAME, value);
+    }
+
+    public void setDefinition(String value){
+        setNodeText(DEFINITION_TAG_NAME, value);
+    }
+
+    public void setId(String value) {
+        setNodeText(ID_TAG_NAME, value);
+    }
+
+    public void setGoName(String value) {
+        setNodeText(NAME_TAG_NAME, value);
+    }
+
+    public void setReference(String value) {
+        setNodeText(REFERENCE_TAG_NAME, value);
+    }
+
+    public void setEvidence(String value) {
+        setNodeText(EVIDENCE_TAG_NAME, value);
+    }
+
+    public void setWith(String value) {
+        setNodeText(WITH_TAG_NAME, value);
+    }
+
+    public void setAspect(String value) {
+        setNodeText(ASPECT_TAG_NAME, value);
+    }
+
+    public void setSource(String value) {
+        setNodeText(SOURCE_TAG_NAME, value);
+    }
+
+    //----------------GETTERS---------------------
+    public int getAnnotationsCount(){
+        return Integer.parseInt(getNodeText(ANNOTATIONS_COUNT_TAG_NAME));
+    }
+    public String getDate() {
+        return getNodeText(DATE_TAG_NAME);
+    }
+
+    public String getDefinition(){
+        return getNodeText(DEFINITION_TAG_NAME);
+    }
+
+    public String getId() {
+        return getNodeText(ID_TAG_NAME);
+    }
+
+    public String getGoName() {
+        return getNodeText(NAME_TAG_NAME);
+    }
+
+    public String getReference() {
+        return getNodeText(REFERENCE_TAG_NAME);
+    }
+
+    public String getEvidence() {
+        return getNodeText(EVIDENCE_TAG_NAME);
+    }
+
+    public String getWith() {
+        return getNodeText(WITH_TAG_NAME);
+    }
+
+    public String getAspect() {
+        return getNodeText(ASPECT_TAG_NAME);
+    }
+
+    public String getSource() {
+        return getNodeText(SOURCE_TAG_NAME);
+    }
+
+    @Override
+    public int compareTo(GoTermXML o) {
+        if(this.getAnnotationsCount() < o.getAnnotationsCount()){
+            return -1;
+        }else if(this.getAnnotationsCount() == o.getAnnotationsCount()){
+            return 0;
+        }else{
+            return 1;
+        }
+    }
+}
