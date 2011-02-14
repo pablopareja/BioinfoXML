@@ -6,6 +6,7 @@
 package com.era7.lib.bioinfoxml.gexf;
 
 import com.era7.lib.bioinfoxml.gexf.viz.VizColorXML;
+import com.era7.lib.bioinfoxml.gexf.viz.VizPositionXML;
 import com.era7.lib.bioinfoxml.gexf.viz.VizSizeXML;
 import com.era7.lib.era7xmlapi.model.XMLElement;
 import com.era7.lib.era7xmlapi.model.XMLElementException;
@@ -53,6 +54,10 @@ public class NodeXML extends XMLElement{
     public void setSize(VizSizeXML vizSize){
         this.root.removeChildren(VizSizeXML.TAG_NAME);
         this.root.addContent(vizSize.asJDomElement());
+    }
+    public void setPosition(VizPositionXML vizPosition){
+        this.root.removeChildren(VizPositionXML.TAG_NAME);
+        this.root.addContent(vizPosition.asJDomElement());
     }
 
     public void setAttvalues(AttValuesXML attValuesXML){
