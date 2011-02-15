@@ -17,7 +17,7 @@ import org.jdom.Element;
  */
 public class VizPositionXML extends XMLElement{
 
-    public static final String TAG_NAME = "color";
+    public static final String TAG_NAME = "position";
 
     public static final String VIZ_NAMESPACE = "viz";
 
