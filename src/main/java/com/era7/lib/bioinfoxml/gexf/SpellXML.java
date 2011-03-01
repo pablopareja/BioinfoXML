@@ -9,33 +9,28 @@ import com.era7.lib.era7xmlapi.model.XMLElement;
 import com.era7.lib.era7xmlapi.model.XMLElementException;
 import org.jdom.Element;
 
+
 /**
  *
  * @author Pablo Pareja Tobes <ppareja@era7.com>
  */
-public class EdgeXML extends XMLElement{
+public class SpellXML extends XMLElement{
 
-    public static final String TAG_NAME = "edge";
+    public static final String TAG_NAME = "spell";
 
-    public static final String ID_ATTRIBUTE = "id";
-    public static final String SOURCE_ATTRIBUTE = "source";
-    public static final String TARGET_ATTRIBUTE = "target";
-    public static final String TYPE_ATTRIBUTE = "type";
     public static final String START_ATTRIBUTE = "start";
     public static final String END_ATTRIBUTE = "end";
 
-    public static final String DIRECTED_TYPE = "directed";
-
-    public EdgeXML(){
+    public SpellXML(){
         super(new Element(TAG_NAME));
     }
-    public EdgeXML(Element elem) throws XMLElementException{
+    public SpellXML(Element elem) throws XMLElementException{
         super(elem);
         if(!elem.getName().equals(TAG_NAME)){
             throw new XMLElementException(XMLElementException.WRONG_TAG_NAME,new XMLElement(elem));
         }
     }
-    public EdgeXML(String value) throws Exception{
+    public SpellXML(String value) throws Exception{
         super(value);
         if(!root.getName().equals(TAG_NAME)){
             throw new XMLElementException(XMLElementException.WRONG_TAG_NAME,new XMLElement(value));
@@ -43,29 +38,12 @@ public class EdgeXML extends XMLElement{
     }
 
     //----------------SETTERS-------------------
-    public void setId(String value){
-        this.root.setAttribute(ID_ATTRIBUTE, value);
-    }
-    public void setSource(String value){
-        this.root.setAttribute(SOURCE_ATTRIBUTE, value);
-    }
-    public void setTarget(String value){
-        this.root.setAttribute(TARGET_ATTRIBUTE, value);
-    }
-    public void setType(String value){
-        this.root.setAttribute(TYPE_ATTRIBUTE,value);
-    }
+    
     public void setStart(String value){
         this.root.setAttribute(START_ATTRIBUTE, value);
     }
     public void setEnd(String value){
         this.root.setAttribute(END_ATTRIBUTE, value);
-    }
-
-
-    public void setAttvalues(AttValuesXML attValuesXML){
-        this.root.removeChildren(AttValuesXML.TAG_NAME);
-        this.root.addContent(attValuesXML.asJDomElement());
     }
 
 }

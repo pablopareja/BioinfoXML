@@ -20,6 +20,8 @@ public class AttValueXML extends XMLElement{
 
     public static final String FOR_ATTRIBUTE = "for";
     public static final String VALUE_ATTRIBUTE = "value";
+    public static final String START_ATTRIBUTE = "start";
+    public static final String END_ATTRIBUTE = "end";
 
     public AttValueXML(){
         super(new Element(TAG_NAME));
@@ -43,6 +45,12 @@ public class AttValueXML extends XMLElement{
     }
     public void setValue(String value){
         this.root.setAttribute(VALUE_ATTRIBUTE, value);
+    }
+    public void setStart(String value){
+        this.root.setAttribute(START_ATTRIBUTE, value);
+    }
+    public void setEnd(String value){
+        this.root.setAttribute(END_ATTRIBUTE, value);
     }
 
 }

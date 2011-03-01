@@ -47,13 +47,13 @@ public class VizPositionXML extends XMLElement{
     }
 
     //----------------SETTERS-------------------
-    public void setX(int value){
+    public void setX(double value){
         this.root.setAttribute(X_ATTRIBUTE, String.valueOf(value));
     }
-    public void setY(int value){
+    public void setY(double value){
         this.root.setAttribute(Y_ATTRIBUTE, String.valueOf(value));
     }
-    public void setZ(int value){
+    public void setZ(double value){
         this.root.setAttribute(Z_ATTRIBUTE, String.valueOf(value));
     }
 

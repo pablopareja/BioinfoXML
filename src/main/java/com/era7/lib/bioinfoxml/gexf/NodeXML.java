@@ -22,6 +22,8 @@ public class NodeXML extends XMLElement{
 
     public static final String ID_ATTRIBUTE = "id";
     public static final String LABEL_ATTRIBUTE = "label";
+    public static final String START_ATTRIBUTE = "start";
+    public static final String END_ATTRIBUTE = "end";
 
 
     public NodeXML(){
@@ -44,6 +46,12 @@ public class NodeXML extends XMLElement{
     public void setId(String value){
         this.root.setAttribute(ID_ATTRIBUTE, value);
     }
+    public void setStart(String value){
+        this.root.setAttribute(START_ATTRIBUTE, value);
+    }
+    public void setEnd(String value){
+        this.root.setAttribute(END_ATTRIBUTE, value);
+    }
     public void setLabel(String value){
         this.root.setAttribute(LABEL_ATTRIBUTE,value);
     }
@@ -63,6 +71,16 @@ public class NodeXML extends XMLElement{
     public void setAttvalues(AttValuesXML attValuesXML){
         this.root.removeChildren(AttValuesXML.TAG_NAME);
         this.root.addContent(attValuesXML.asJDomElement());
+    }
+    public void setSpells(SpellsXML spellsXML){
+        this.root.removeChildren(SpellsXML.TAG_NAME);
+        this.root.addContent(spellsXML.asJDomElement());
+    }
+
+    //----------------GETTERS-------------------
+
+    public String getLabel(){
+        return this.root.getAttributeValue(LABEL_ATTRIBUTE);
     }
 
 

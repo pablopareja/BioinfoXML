@@ -18,9 +18,13 @@ public class GraphXML extends XMLElement{
     public static final String TAG_NAME = "graph";
 
     public static final String DEFAULT_EDGE_TYPE_ATTRIBUTE = "defaultedgetype";
-
+    public static final String MODE_ATTRIBUTE = "mode";
+    public static final String TIME_FORMAT_ATTRIBUTE = "timeformat";
 
     public static final String DIRECTED_EDGE_TYPE = "directed";
+    public static final String DYNAMIC_MODE = "dynamic";
+    public static final String DATE_TIME_FORMAT = "date";
+
 
     public GraphXML(){
         super(new Element(TAG_NAME));
@@ -40,7 +44,13 @@ public class GraphXML extends XMLElement{
 
     //----------------SETTERS-------------------
     public void setDefaultEdgeType(String value){
+        this.root.setAttribute(MODE_ATTRIBUTE, value);
+    }
+    public void setMode(String value){
         this.root.setAttribute(DEFAULT_EDGE_TYPE_ATTRIBUTE, value);
+    }
+    public void setTimeformat(String value){
+        this.root.setAttribute(TIME_FORMAT_ATTRIBUTE, value);
     }
     public void setNodes(NodesXML value){
         this.root.removeChildren(NodesXML.TAG_NAME);
