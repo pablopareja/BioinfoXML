@@ -199,7 +199,11 @@ public class GoTermXML extends XMLElement implements Comparable<GoTermXML> {
         if(this.getAnnotationsCount() < o.getAnnotationsCount()){
             return -1;
         }else if(this.getAnnotationsCount() == o.getAnnotationsCount()){
-            return 0;
+            if(this.getId().equals(o.getId())){
+                return 0;
+            }else{
+                return 1;
+            }
         }else{
             return 1;
         }

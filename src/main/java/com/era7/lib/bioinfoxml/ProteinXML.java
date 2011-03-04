@@ -32,6 +32,7 @@ public class ProteinXML extends XMLElement{
 
     public static final String PROTEIN_COVERAGE_ABSOLUTE = "protein_coverage_absolute";
     public static final String PROTEIN_COVERAGE_PERCENTAGE = "protein_coverage_percentage";
+    public static final String NUMBER_OF_ISOTIGS = "number_of_isotigs";
 
     public static final String GO_TERMS_TAG_NAME = "go_terms";
     public static final String PROCESS_GO_TERMS_TAG_NAME = "biological_process";
@@ -61,6 +62,7 @@ public class ProteinXML extends XMLElement{
     public void setLength(int value){    setNodeText(LENGTH_TAG_NAME, String.valueOf(value));}
     public void setProteinCoverageAbsolute(int value){  setNodeText(PROTEIN_COVERAGE_ABSOLUTE, String.valueOf(value));}
     public void setProteinCoveragePercentage(double value){  setNodeText(PROTEIN_COVERAGE_PERCENTAGE, String.valueOf(value));}
+    public void setNumberOfIsotigs(int value){  setNodeText(NUMBER_OF_ISOTIGS, String.valueOf(value));}
     public void setSplice(String value){    setNodeText(SPLICE_TAG_NAME, value);}
     public void setDb(String value){   setNodeText(DB_TAG_NAME, value);}
     public void setSymbol(String value){ setNodeText(SYMBOL_TAG_NAME, value);}
@@ -72,6 +74,7 @@ public class ProteinXML extends XMLElement{
     public int getLength(){ return Integer.parseInt(getNodeText(LENGTH_TAG_NAME));}
     public int getProteinCoverageAbsolute(){ return Integer.parseInt(getNodeText(PROTEIN_COVERAGE_ABSOLUTE));}
     public double getProteinCoveragePercentage(){   return Double.parseDouble(getNodeText(PROTEIN_COVERAGE_PERCENTAGE));}
+    public int getNumberOfIsotigs(){ return Integer.parseInt(getNodeText(NUMBER_OF_ISOTIGS));}
     public String getSplice( ){  return getNodeText(SPLICE_TAG_NAME);}
     public String getDb( ){   return getNodeText(DB_TAG_NAME);}
     public String getSymbol( ){ return getNodeText(SYMBOL_TAG_NAME);}
