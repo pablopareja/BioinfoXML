@@ -39,6 +39,8 @@ public class GoTermXML extends XMLElement implements Comparable<GoTermXML> {
     public static final String SOURCE_TAG_NAME = "source";
     public static final String ANNOTATIONS_COUNT_TAG_NAME = "annotations_count";
 
+    public static final String PROTEIN_ANNOTATION_LEADING_TO_SLIM_TERM = "protein_annotation_leading_to_slim_term";
+
     public GoTermXML() {
         super(new Element(TAG_NAME));
     }
@@ -83,7 +85,7 @@ public class GoTermXML extends XMLElement implements Comparable<GoTermXML> {
     public static String transformIdToGoOfficialSyntax(String temp){
         if(temp.indexOf("GO:") < 0){
             int digits = temp.length();
-            StringBuffer buffer = new StringBuffer(9);
+            StringBuilder buffer = new StringBuilder(9);
             buffer.append("GO:");
             for (int i = 0; i < 7-digits; i++) {
                 buffer.append("0");
@@ -95,11 +97,14 @@ public class GoTermXML extends XMLElement implements Comparable<GoTermXML> {
         }
     }
 
+    /**
+     * @deprecated 
+     */
     public void transformIdToGoOfficialSyntax(){
         String temp = getId();
         if(temp.indexOf("GO:") < 0){
             int digits = temp.length();
-            StringBuffer buffer = new StringBuffer(9);
+            StringBuilder buffer = new StringBuilder(9);
             buffer.append("GO:");
             for (int i = 0; i < 7-digits; i++) {
                 buffer.append("0");
@@ -108,6 +113,9 @@ public class GoTermXML extends XMLElement implements Comparable<GoTermXML> {
             setId(buffer.toString());
         }
     }
+    /**
+     * @deprecated
+     */
     public void transformIdToDBSyntax(){
         String temp = getId();
         int tempId = Integer.parseInt(temp.replaceFirst("GO:", ""));
@@ -121,11 +129,9 @@ public class GoTermXML extends XMLElement implements Comparable<GoTermXML> {
     public void setDate(String value) {
         setNodeText(DATE_TAG_NAME, value);
     }
-
     public void setDefinition(String value){
         setNodeText(DEFINITION_TAG_NAME, value);
     }
-
     public void setId(String value) {
         setNodeText(ID_TAG_NAME, value);
     }
@@ -152,6 +158,13 @@ public class GoTermXML extends XMLElement implements Comparable<GoTermXML> {
 
     public void setSource(String value) {
         setNodeText(SOURCE_TAG_NAME, value);
+    }
+
+    public void setProteinAnnotationLeadingToSlimTerm(GoTermXML goTerm){
+        initProteinAnnotationLeadingToSlimTermTag();
+        Element elem = this.root.getChild(PROTEIN_ANNOTATION_LEADING_TO_SLIM_TERM);
+        elem.removeChildren(GoTermXML.TAG_NAME);
+        elem.addContent(goTerm.asJDomElement());
     }
 
     //----------------GETTERS---------------------
@@ -192,6 +205,25 @@ public class GoTermXML extends XMLElement implements Comparable<GoTermXML> {
 
     public String getSource() {
         return getNodeText(SOURCE_TAG_NAME);
+    }
+
+    public GoTermXML getProteinAnnotationLeadingToSlimTerm(){
+        GoTermXML result = null;
+        Element elem = root.getChild(PROTEIN_ANNOTATION_LEADING_TO_SLIM_TERM);
+        if(elem != null){
+            Element goElem = elem.getChild(GoTermXML.TAG_NAME);
+            result = new GoTermXML(goElem);
+        }
+        return result;
+    }
+
+
+    private void initProteinAnnotationLeadingToSlimTermTag(){
+        Element elem = root.getChild(PROTEIN_ANNOTATION_LEADING_TO_SLIM_TERM);
+        if(elem == null){
+            elem = new Element(PROTEIN_ANNOTATION_LEADING_TO_SLIM_TERM);
+            root.addContent(elem);
+        }
     }
 
     @Override

@@ -21,6 +21,8 @@ public class GOSlimXML extends XMLElement{
     //public static final String SLIM_SET_TAG_NAME = "slim_set";
     public static final String GO_TERMS_LOST_NOT_INCLUDED_IN_SLIM_SET = "go_terms_lost_not_included_in_slim_set";
 
+    public static final String PROTEINS_TAG_NAME = "proteins";
+
     public GOSlimXML() {
         super(new Element(TAG_NAME));
     }

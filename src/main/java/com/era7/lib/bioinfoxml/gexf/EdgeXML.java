@@ -62,6 +62,27 @@ public class EdgeXML extends XMLElement{
         this.root.setAttribute(END_ATTRIBUTE, value);
     }
 
+    //----------------GETTERS-------------------
+    public String getId(){
+        return this.root.getAttributeValue(ID_ATTRIBUTE);
+    }
+    public String getSource(){
+        return this.root.getAttributeValue(SOURCE_ATTRIBUTE);
+    }
+    public String getTarget(){
+        return this.root.getAttributeValue(TARGET_ATTRIBUTE);
+    }
+    public String getType(){
+        return this.root.getAttributeValue(TYPE_ATTRIBUTE);
+    }
+    public String getStart(){
+        return this.root.getAttributeValue(START_ATTRIBUTE);
+    }
+    public String getEnd(){
+        return this.root.getAttributeValue(END_ATTRIBUTE);
+    }
+
+
 
     public void setAttvalues(AttValuesXML attValuesXML){
         this.root.removeChildren(AttValuesXML.TAG_NAME);

@@ -23,11 +23,14 @@ public class ProteinXML extends XMLElement{
     public static final String TAG_NAME = "protein";
 
     public static final String ID_TAG_NAME = "id";
-    public static final String DB_TAG_NAME = "db";
-    public static final String SPLICE_TAG_NAME = "splice";
-    public static final String SYMBOL_TAG_NAME = "symbol";
-    public static final String TAXON_TAG_NAME = "taxon";
-    public static final String QUALIFIER_TAG_NAME = "qualifier";
+    public static final String NAME_TAG_NAME = "name";
+    public static final String FULL_NAME_TAG_NAME = "full_name";
+    public static final String SHORT_NAME_TAG_NAME = "short_name";
+    //public static final String DB_TAG_NAME = "db";
+    //public static final String SPLICE_TAG_NAME = "splice";
+    //public static final String SYMBOL_TAG_NAME = "symbol";
+    //public static final String TAXON_TAG_NAME = "taxon";
+    //public static final String QUALIFIER_TAG_NAME = "qualifier";
     public static final String LENGTH_TAG_NAME = "length";
 
     public static final String PROTEIN_COVERAGE_ABSOLUTE = "protein_coverage_absolute";
@@ -63,11 +66,9 @@ public class ProteinXML extends XMLElement{
     public void setProteinCoverageAbsolute(int value){  setNodeText(PROTEIN_COVERAGE_ABSOLUTE, String.valueOf(value));}
     public void setProteinCoveragePercentage(double value){  setNodeText(PROTEIN_COVERAGE_PERCENTAGE, String.valueOf(value));}
     public void setNumberOfIsotigs(int value){  setNodeText(NUMBER_OF_ISOTIGS, String.valueOf(value));}
-    public void setSplice(String value){    setNodeText(SPLICE_TAG_NAME, value);}
-    public void setDb(String value){   setNodeText(DB_TAG_NAME, value);}
-    public void setSymbol(String value){ setNodeText(SYMBOL_TAG_NAME, value);}
-    public void setTaxon(String value){    setNodeText(TAXON_TAG_NAME, value);}
-    public void setQualifier(String value){    setNodeText(QUALIFIER_TAG_NAME, value);}
+    public void setProteinName(String value){   setNodeText(NAME_TAG_NAME, value);}
+    public void setFullName(String value){  setNodeText(FULL_NAME_TAG_NAME, value);}
+    public void setShortName(String value){ setNodeText(SHORT_NAME_TAG_NAME, value);}
 
     //----------------GETTERS---------------------
     public String getId( ){  return getNodeText(ID_TAG_NAME);}
@@ -75,11 +76,9 @@ public class ProteinXML extends XMLElement{
     public int getProteinCoverageAbsolute(){ return Integer.parseInt(getNodeText(PROTEIN_COVERAGE_ABSOLUTE));}
     public double getProteinCoveragePercentage(){   return Double.parseDouble(getNodeText(PROTEIN_COVERAGE_PERCENTAGE));}
     public int getNumberOfIsotigs(){ return Integer.parseInt(getNodeText(NUMBER_OF_ISOTIGS));}
-    public String getSplice( ){  return getNodeText(SPLICE_TAG_NAME);}
-    public String getDb( ){   return getNodeText(DB_TAG_NAME);}
-    public String getSymbol( ){ return getNodeText(SYMBOL_TAG_NAME);}
-    public String getTaxon( ){    return getNodeText(TAXON_TAG_NAME);}
-    public String getQualifier( ){    return getNodeText(QUALIFIER_TAG_NAME);}
+    public String getProteinName() {    return getNodeText(NAME_TAG_NAME);    }
+    public String getFullName(){     return getNodeText(FULL_NAME_TAG_NAME);   }
+    public String getShortName(){     return getNodeText(SHORT_NAME_TAG_NAME);   }
 
     public List<GoTermXML> getMolecularFunctionGoTerms(){
         Element goTerms = root.getChild(GO_TERMS_TAG_NAME);

@@ -7,6 +7,8 @@ package com.era7.lib.bioinfoxml;
 
 import com.era7.lib.era7xmlapi.model.XMLElement;
 import com.era7.lib.era7xmlapi.model.XMLElementException;
+import java.util.ArrayList;
+import java.util.List;
 import org.jdom.Element;
 
 /**
@@ -25,6 +27,8 @@ public class ContigXML extends XMLElement{
     public static final String GAPS_PERCENTAGE_TAG_NAME = "gaps_percentage";
     public static final String ORGANISM_TAG_NAME = "organism";
     public static final String ORGANISM_COMPLETE_TAXONOMY_LINEAGE = "organism_complete_taxonomy_lineage";
+
+    public static final String HSPS_TAG_NAME = "hsps";
 
     public ContigXML(){
         super(new Element(TAG_NAME));
@@ -63,6 +67,19 @@ public class ContigXML extends XMLElement{
     public String getOrganismCompleteTaxonomyLineage(){ return getNodeText(ORGANISM_COMPLETE_TAXONOMY_LINEAGE);}
     public double getGapsPercentage(){  return Double.parseDouble(getNodeText(GAPS_PERCENTAGE_TAG_NAME));}
 
+    public List<Hsp> getHsps() throws XMLElementException{
+        Element hsps = root.getChild(HSPS_TAG_NAME);
+        if(hsps == null){
+            return null;
+        }else{
+            ArrayList<Hsp> array = new ArrayList<Hsp>();
+            for (Object hspElem : hsps.getChildren(Hsp.TAG_NAME)) {
+                array.add(new Hsp((Element)hspElem));
+            }
+            return array;
+        }
+    }
+
     //----------------SETTERS-------------------
     public void setId(String value){  setNodeText(ID_TAG_NAME, value);}
     public void setLength(int value){    setNodeText(LENGTH_TAG_NAME, String.valueOf(value));}
@@ -73,5 +90,20 @@ public class ContigXML extends XMLElement{
     public void setOrganismCompleteTaxonomyLineage(String value){   setNodeText(ORGANISM_COMPLETE_TAXONOMY_LINEAGE, value);}
     public void setGapsPercentage(double value){    setNodeText(GAPS_PERCENTAGE_TAG_NAME, String.valueOf(value));}
 
+    
+    public void addHsp(Hsp hsp){
+        initHspsTag();
+        Element hsps = root.getChild(HSPS_TAG_NAME);
+        hsps.addContent(hsp.asJDomElement());
+    }
+
+
+    private void initHspsTag(){
+        Element hsps = root.getChild(HSPS_TAG_NAME);
+        if(hsps == null){
+            hsps = new Element(HSPS_TAG_NAME);
+            root.addContent(hsps);
+        }
+    }
 
 }
