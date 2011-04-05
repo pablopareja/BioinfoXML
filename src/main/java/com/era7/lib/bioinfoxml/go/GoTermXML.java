@@ -84,51 +84,6 @@ public class GoTermXML extends XMLElement implements Comparable<GoTermXML> {
         return temp;
     }
 
-//    /**
-//     * @deprecated
-//     * @param temp
-//     * @return
-//     */
-//    public static String transformIdToGoOfficialSyntax(String temp){
-//        if(temp.indexOf("GO:") < 0){
-//            int digits = temp.length();
-//            StringBuilder buffer = new StringBuilder(9);
-//            buffer.append("GO:");
-//            for (int i = 0; i < 7-digits; i++) {
-//                buffer.append("0");
-//            }
-//            buffer.append(temp);
-//            return buffer.toString();
-//        }else{
-//            return temp;
-//        }
-//    }
-
-//    /**
-//     * @deprecated
-//     */
-//    public void transformIdToGoOfficialSyntax(){
-//        String temp = getId();
-//        if(temp.indexOf("GO:") < 0){
-//            int digits = temp.length();
-//            StringBuilder buffer = new StringBuilder(9);
-//            buffer.append("GO:");
-//            for (int i = 0; i < 7-digits; i++) {
-//                buffer.append("0");
-//            }
-//            buffer.append(temp);
-//            setId(buffer.toString());
-//        }
-//    }
-//    /**
-//     * @deprecated
-//     */
-//    public void transformIdToDBSyntax(){
-//        String temp = getId();
-//        int tempId = Integer.parseInt(temp.replaceFirst("GO:", ""));
-//        setId(String.valueOf(tempId));
-//    }
-
     //----------------SETTERS-------------------
     public void setAnnotationsCount(int value){
         setNodeText(ANNOTATIONS_COUNT_TAG_NAME, String.valueOf(value));
