@@ -1,5 +1,7 @@
 Era7BioinfoXML is a set of XML wrapper classes based on Jdom library (http://www.jdom.org)
 modelling a set of general utility entities for bioinformatics.
 
+Library jars can be found at 'releases' folder.
 
+This project is based on the library Era7XmlApi (https://github.com/pablopareja/Era7XmlApi).
  
