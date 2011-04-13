@@ -47,17 +47,26 @@ public class VizColorXML extends XMLElement{
         }
     }
 
+    public VizColorXML(int r, int g, int b, int a){
+        super(new Element(TAG_NAME));
+        this.setNameSpace(new NameSpace(VIZ_NAMESPACE, VIZ_NAMESPACE));
+        setR(r);
+        setG(g);
+        setB(b);
+        setA(a);
+    }
+
     //----------------SETTERS-------------------
-    public void setR(int value){
+    public final void setR(int value){
         this.root.setAttribute(R_ATTRIBUTE, String.valueOf(value));
     }
-    public void setG(int value){
+    public final void setG(int value){
         this.root.setAttribute(G_ATTRIBUTE, String.valueOf(value));
     }
-    public void setB(int value){
+    public final void setB(int value){
         this.root.setAttribute(B_ATTRIBUTE, String.valueOf(value));
     }
-    public void setA(int value){
+    public final void setA(int value){
         this.root.setAttribute(A_ATTRIBUTE, String.valueOf(value));
     }
 

@@ -46,14 +46,21 @@ public class VizPositionXML extends XMLElement{
         }
     }
 
+    public VizPositionXML(double x, double y, double z){
+        super(new Element(TAG_NAME));
+        this.setX(x);
+        this.setY(y);
+        this.setZ(z);
+    }
+
     //----------------SETTERS-------------------
-    public void setX(double value){
+    public final void setX(double value){
         this.root.setAttribute(X_ATTRIBUTE, String.valueOf(value));
     }
-    public void setY(double value){
+    public final void setY(double value){
         this.root.setAttribute(Y_ATTRIBUTE, String.valueOf(value));
     }
-    public void setZ(double value){
+    public final void setZ(double value){
         this.root.setAttribute(Z_ATTRIBUTE, String.valueOf(value));
     }
 
