@@ -44,8 +44,14 @@ public class VizSizeXML extends XMLElement{
         }
     }
 
+    public VizSizeXML(double value){
+        super(new Element(TAG_NAME));
+        this.setNameSpace(new NameSpace(VIZ_NAMESPACE, VIZ_NAMESPACE));
+        setValue(value);
+    }
+
     //----------------SETTERS-------------------
-    public void setValue(double value){
+    public final void setValue(double value){
         this.root.setAttribute(VALUE_ATTRIBUTE, String.valueOf(value));
     }
 

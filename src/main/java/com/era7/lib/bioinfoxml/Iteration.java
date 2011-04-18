@@ -19,6 +19,8 @@ public class Iteration extends XMLElement {
     public static final String TAG_NAME = "Iteration";
     public static final String ITERATION_HITS_TAG_NAME = "Iteration_hits";
     public static final String ITERATION_QUERY_DEF_TAG_NAME = "Iteration_query-def";
+    public static final String ITERATION_QUERY_LEN_TAG_NAME = "Iteration_query-len";
+    public static final String ITERATION_QUERY_ID_TAG_NAME = "Iteration_query-ID";
 
     public Iteration() {
         super(new Element(TAG_NAME));
@@ -39,9 +41,16 @@ public class Iteration extends XMLElement {
     }
 
     //----------------GETTERS---------------------
-    public String getQueryDef() {
-        return getNodeText(ITERATION_QUERY_DEF_TAG_NAME);
-    }
+    public String getQueryDef() {        return getNodeText(ITERATION_QUERY_DEF_TAG_NAME);    }
+    public String getQueryLen(){    return getNodeText(ITERATION_QUERY_LEN_TAG_NAME);}
+    public String getQueryId(){ return getNodeText(ITERATION_QUERY_ID_TAG_NAME);}
+
+    //----------------SETTERS---------------------
+    public void setQueryDef(String value){  setNodeText(ITERATION_QUERY_DEF_TAG_NAME, value);}
+    public void setQueryLen(String value){  setNodeText(ITERATION_QUERY_LEN_TAG_NAME, value);}
+    public void setQueryId(String value){  setNodeText(ITERATION_QUERY_ID_TAG_NAME, value);}
+
+
 
     public String getUniprotIdFromQueryDef() {
         String text = getNodeText(ITERATION_QUERY_DEF_TAG_NAME);
