@@ -7,6 +7,8 @@ package com.era7.lib.bioinfoxml;
 
 import com.era7.lib.era7xmlapi.model.XMLElement;
 import com.era7.lib.era7xmlapi.model.XMLElementException;
+import java.util.ArrayList;
+import java.util.List;
 import org.jdom.Element;
 
 /**
@@ -32,6 +34,17 @@ public class PredictedRnas extends XMLElement{
         if(!root.getName().equals(TAG_NAME)){
             throw new XMLElementException(XMLElementException.WRONG_TAG_NAME,new XMLElement(value));
         }
+    }
+    
+    public List<ContigXML> getContigs() throws XMLElementException{
+        List<ContigXML> list = new ArrayList<ContigXML>();
+        
+        List<Element> contigs = root.getChildren(ContigXML.TAG_NAME);
+        for (Element element : contigs) {
+            list.add(new ContigXML(element));
+        }
+        
+        return list;
     }
 
     

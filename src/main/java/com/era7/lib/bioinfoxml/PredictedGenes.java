@@ -7,6 +7,8 @@ package com.era7.lib.bioinfoxml;
 
 import com.era7.lib.era7xmlapi.model.XMLElement;
 import com.era7.lib.era7xmlapi.model.XMLElementException;
+import java.util.ArrayList;
+import java.util.List;
 import org.jdom.Element;
 
 /**
@@ -48,4 +50,16 @@ public class PredictedGenes extends XMLElement{
     public int getDifSpan( ){  return Integer.parseInt(getNodeText(DIF_SPAN_TAG_NAME));}
     public int getGeneThreshold( ){  return Integer.parseInt(getNodeText(GENE_THRESHOLD_TAG_NAME));}
     public String getPreferentOrganism(){   return getNodeText(PREFERENT_ORGANISM);}
+    
+    
+    public List<ContigXML> getContigs() throws XMLElementException{
+        List<ContigXML> list = new ArrayList<ContigXML>();
+        
+        List<Element> contigs = root.getChildren(ContigXML.TAG_NAME);
+        for (Element element : contigs) {
+            list.add(new ContigXML(element));
+        }
+        
+        return list;
+    }
 }

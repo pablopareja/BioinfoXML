@@ -5,7 +5,7 @@
 
 package com.era7.lib.bioinfoxml.go;
 
-import com.era7.lib.bioinfoxml.ProteinXML;
+import com.era7.lib.bioinfoxml.uniprot.ProteinXML;
 import com.era7.lib.era7xmlapi.model.XMLElement;
 import java.util.ArrayList;
 import java.util.List;

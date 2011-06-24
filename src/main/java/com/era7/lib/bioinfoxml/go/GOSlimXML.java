@@ -6,6 +6,8 @@
 package com.era7.lib.bioinfoxml.go;
 
 import com.era7.lib.era7xmlapi.model.XMLElement;
+import java.util.ArrayList;
+import java.util.List;
 import org.jdom.Element;
 
 /**
@@ -61,14 +63,41 @@ public class GOSlimXML extends XMLElement{
         }
         return set;
     }
-    public int getGoTermsLostNotIncludedInSlimSet() throws NumberFormatException{
-        return Integer.parseInt(getNodeText(GO_TERMS_LOST_NOT_INCLUDED_IN_SLIM_SET));
+    public List<GoTermXML> getGoTermsLostNotIncludedInSlimSet(){
+        
+        List<GoTermXML> list = new ArrayList<GoTermXML>();
+        
+        Element elem = this.asJDomElement().getChild(GO_TERMS_LOST_NOT_INCLUDED_IN_SLIM_SET);
+        if(elem != null){
+            List<Element> tempList = elem.getChildren(GoTermXML.TAG_NAME);
+            for (Element element : tempList) {
+                list.add(new GoTermXML(element));
+            }
+        }
+        
+        return list;
     }
     public int getSampleGeneNumber() throws NumberFormatException{
         return Integer.parseInt(getNodeText(SAMPLE_GENE_NUMBER_TAG_NAME));
     }
     public int getSampleAnnotatedGeneNumber() throws NumberFormatException{
         return Integer.parseInt(getNodeText(SAMPLE_ANNOTATED_GENE_NUMBER_TAG_NAME));
+    }
+    
+    
+    public void addGoTermLostNotIncludedInSlimSet(GoTermXML term){
+        Element elem = initGoTermLostNotIncludedInSlimSetTag();
+        elem.addContent(term.asJDomElement());        
+    }
+    
+    
+    private Element initGoTermLostNotIncludedInSlimSetTag(){
+        Element elem = this.asJDomElement().getChild(GO_TERMS_LOST_NOT_INCLUDED_IN_SLIM_SET);
+        if(elem == null){
+            this.asJDomElement().addContent(new Element(GO_TERMS_LOST_NOT_INCLUDED_IN_SLIM_SET));
+            elem = this.asJDomElement().getChild(GO_TERMS_LOST_NOT_INCLUDED_IN_SLIM_SET);
+        }
+        return elem;
     }
 
 }
