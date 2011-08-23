@@ -40,7 +40,7 @@ public class NCBITaxonomyNodeXML extends XMLElement{
     }
         
     //----------------GETTERS---------------------
-    public String getTaxId( ){  return getNodeText(TAX_ID_TAG_NAME);}
+    public int getTaxId( ){  return Integer.parseInt(getNodeText(TAX_ID_TAG_NAME));}
     public String getParentTaxId( ){  return getNodeText(PARENT_TAX_ID_TAG_NAME);}
     public String getRank(){    return getNodeText(RANK_TAG_NAME);}
     public String getEmblCode(){    return getNodeText(EMBL_CODE_TAG_NAME);}
@@ -48,7 +48,7 @@ public class NCBITaxonomyNodeXML extends XMLElement{
     public String getScientificName(){    return getNodeText(SCIENTIFIC_NAME_TAG_NAME);}
     
     //----------------SETTERS-------------------
-    public void setTaxId(String value){  setNodeText(TAX_ID_TAG_NAME, value);}
+    public void setTaxId(int value){  setNodeText(TAX_ID_TAG_NAME, String.valueOf(value));}
     public void setParentTaxId(String value){  setNodeText(PARENT_TAX_ID_TAG_NAME, value);}
     public void setRank(String value){  setNodeText(RANK_TAG_NAME, value);}
     public void setEmblCode(String value){  setNodeText(EMBL_CODE_TAG_NAME, value);}

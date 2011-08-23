@@ -22,6 +22,7 @@ public class Hit extends XMLElement{
     public static final String HIT_HSPS_TAG_NAME = "Hit_hsps";
     public static final String HIT_DEF_TAG_NAME =  "Hit_def";
     public static final String HIT_LEN_TAG_NAME = "Hit_len";
+    public static final String HIT_ID_TAG_NAME = "Hit_id";
     public static final String UNIPROT_ID_TAG_NAME = "uniprot_id";
 
     public Hit(){
@@ -53,10 +54,12 @@ public class Hit extends XMLElement{
 
     public String getHitDef(){  return getNodeText(HIT_DEF_TAG_NAME); }
     public int getHitLen(){  return Integer.parseInt(getNodeText(HIT_LEN_TAG_NAME)); }
+    public String getHitId(){   return getNodeText(HIT_ID_TAG_NAME);}
     public String getUniprotID(){   return getNodeText(UNIPROT_ID_TAG_NAME);}
     public String getScaffoldIDFromHitDef(){    return getHitDef().split(" ")[0];}
 
     //----------------SETTERS---------------------
+    public void setHitId(String value){ setNodeText(HIT_ID_TAG_NAME, value);}
     public void setHitDef(String value){    setNodeText(HIT_DEF_TAG_NAME,value);}
     public void setHitLef(int value){   setNodeText(HIT_LEN_TAG_NAME, String.valueOf(value));}
     public void setUniprotID(String value){ setNodeText(UNIPROT_ID_TAG_NAME, value);}
