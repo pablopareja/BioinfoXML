@@ -18,7 +18,7 @@ public class KeyXML extends XMLElement{
     public static final String EDGE = "edge";
     public static final String NODE = "node";
 
-    public static final String TAG_NAME = "edge";
+    public static final String TAG_NAME = "key";
 
     public static final String ID_ATTRIBUTE = "id";
     public static final String FOR_ATTRIBUTE = "for";
