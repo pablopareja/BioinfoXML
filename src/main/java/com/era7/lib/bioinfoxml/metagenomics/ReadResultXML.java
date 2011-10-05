@@ -53,7 +53,7 @@ public class ReadResultXML extends XMLElement{
     public String getQuerySequence(){  return getNodeText(QUERY_SEQUENCE_TAG_NAME);}
     public String getHitSequence(){ return getNodeText(HIT_SEQUENCE_TAG_NAME);}
     public String getMidline(){ return getNodeText(MIDLINE_TAG_NAME);}
-    public String getGiId(){    return getNodeText(GI_ID_TAG_NAME);}
+    public int getGiId(){    return Integer.parseInt(getNodeText(GI_ID_TAG_NAME));}
 
     //----------------SETTERS---------------------
     public void setReadId(String type){    setNodeText(READ_ID_TAG_NAME, type);}
@@ -65,6 +65,6 @@ public class ReadResultXML extends XMLElement{
     public void setQuerySequence(String type){    setNodeText(QUERY_SEQUENCE_TAG_NAME, type);}
     public void setHitSequence(String value){  setNodeText(HIT_SEQUENCE_TAG_NAME, value);}
     public void setMidline(String value){  setNodeText(MIDLINE_TAG_NAME, value);}
-    public void setGiId(String value){  setNodeText(GI_ID_TAG_NAME, value);}
+    public void setGiId(int value){  setNodeText(GI_ID_TAG_NAME, String.valueOf(value));}
     
 }
