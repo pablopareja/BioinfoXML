@@ -23,6 +23,7 @@ public class Bio4jRelationshipXML extends XMLElement{
     public static final String DESCRIPTION_TAG_NAME = "description";
     public static final String START_NODES_TAG_NAME = "start_nodes";
     public static final String END_NODES_TAG_NAME = "end_nodes";
+    public static final String INDEXES_TAG_NAME = "indexes";
     public static final String JAVADOC_URL_TAG_NAME = "javadoc_url";
     
     public static final String RELATIONSHIP_ITEM_TYPE = "relationship";
@@ -69,6 +70,16 @@ public class Bio4jRelationshipXML extends XMLElement{
         }
         return list;
     }
+    public List<Bio4jRelationshipIndexXML> getIndexes() throws XMLElementException{
+        LinkedList<Bio4jRelationshipIndexXML> list = new LinkedList<Bio4jRelationshipIndexXML>();
+        Element elem = root.getChild(INDEXES_TAG_NAME);
+        if(elem != null){
+            for (Object e : elem.getChildren(Bio4jRelationshipIndexXML.TAG_NAME)) {
+                list.add(new Bio4jRelationshipIndexXML((Element)e));
+            }            
+        }        
+        return list;
+    }
     
     //----------------SETTERS-------------------
     public void setDescription(String value){  setNodeText(DESCRIPTION_TAG_NAME, value);}
@@ -84,6 +95,10 @@ public class Bio4jRelationshipXML extends XMLElement{
         Element elem = initEndNodesTag();
         elem.addContent(node.getRoot());                
     }
+    public void addIndex(Bio4jRelationshipIndexXML index){
+        Element elem = initIndexesTag();
+        elem.addContent(index.getRoot());     
+    }
     
     private Element initStartNodesTag(){
         Element elem = root.getChild(START_NODES_TAG_NAME);
@@ -97,6 +112,14 @@ public class Bio4jRelationshipXML extends XMLElement{
         Element elem = root.getChild(END_NODES_TAG_NAME);
         if(elem == null){
             elem = new Element(END_NODES_TAG_NAME);
+            root.addContent(elem);
+        }
+        return elem;
+    }
+    private Element initIndexesTag(){
+        Element elem = root.getChild(INDEXES_TAG_NAME);
+        if(elem == null){
+            elem = new Element(INDEXES_TAG_NAME);
             root.addContent(elem);
         }
         return elem;

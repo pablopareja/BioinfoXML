@@ -23,6 +23,7 @@ public class Bio4jNodeXML extends XMLElement{
     public static final String ITEM_TYPE_TAG_NAME = "item_type";
     public static final String INCOMING_RELATIONSHIPS_TAG_NAME = "in_rels";
     public static final String OUTGOING_RELATIONSHIPS_TAG_NAME = "out_rels";
+    public static final String INDEXES_TAG_NAME = "indexes";
     public static final String JAVADOC_URL_TAG_NAME = "javadoc_url";
     
     public static final String NODE_ITEM_TYPE = "node";
@@ -69,6 +70,16 @@ public class Bio4jNodeXML extends XMLElement{
         }
         return list;
     }
+    public List<Bio4jNodeIndexXML> getIndexes() throws XMLElementException{
+        LinkedList<Bio4jNodeIndexXML> list = new LinkedList<Bio4jNodeIndexXML>();
+        Element elem = root.getChild(INDEXES_TAG_NAME);
+        if(elem != null){
+            for (Object e : elem.getChildren(Bio4jNodeIndexXML.TAG_NAME)) {
+                list.add(new Bio4jNodeIndexXML((Element)e));
+            }            
+        }        
+        return list;
+    }
     
     //----------------SETTERS-------------------
     public void setDescription(String value){  setNodeText(DESCRIPTION_TAG_NAME, value);}
@@ -84,6 +95,10 @@ public class Bio4jNodeXML extends XMLElement{
         Element elem = initOutgoingRelationshipsTag();
         elem.addContent(rel.getRoot());                
     }
+    public void addIndex(Bio4jNodeIndexXML index){
+        Element elem = initIndexesTag();
+        elem.addContent(index.getRoot());     
+    }
     
     private Element initIncomingRelationshipsTag(){
         Element elem = root.getChild(INCOMING_RELATIONSHIPS_TAG_NAME);
@@ -97,6 +112,14 @@ public class Bio4jNodeXML extends XMLElement{
         Element elem = root.getChild(OUTGOING_RELATIONSHIPS_TAG_NAME);
         if(elem == null){
             elem = new Element(OUTGOING_RELATIONSHIPS_TAG_NAME);
+            root.addContent(elem);
+        }
+        return elem;
+    }
+    private Element initIndexesTag(){
+        Element elem = root.getChild(INDEXES_TAG_NAME);
+        if(elem == null){
+            elem = new Element(INDEXES_TAG_NAME);
             root.addContent(elem);
         }
         return elem;
