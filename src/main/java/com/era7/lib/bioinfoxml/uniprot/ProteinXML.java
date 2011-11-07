@@ -34,6 +34,13 @@ public class ProteinXML extends XMLElement{
     public static final String KEYWORDS_TAG_NAME = "keywords";
     public static final String INTERPROS_TAG_NAME = "interpros";
     public static final String COMMENTS_TAG_NAME = "comments";
+    public static final String SUBCELLULAR_LOCATIONS_TAG_NAME = "subcellular_locations";
+    
+    public static final String PROTEIN_PROTEIN_OUTGOING_INTERACTIONS_TAG_NAME = "protein_protein_outgoing_interactions";
+    public static final String PROTEIN_PROTEIN_INCOMING_INTERACTIONS_TAG_NAME = "protein_protein_incoming_interactions";
+    public static final String PROTEIN_ISOFORM_OUTGOING_INTERACTIONS_TAG_NAME = "protein_isoform_outgoing_interactions";
+    public static final String PROTEIN_ISOFORM_INCOMING_INTERACTIONS_TAG_NAME = "protein_isoform_incoming_interactions";
+    
     
     public static final String PROTEIN_COVERAGE_ABSOLUTE = "protein_coverage_absolute";
     public static final String PROTEIN_COVERAGE_PERCENTAGE = "protein_coverage_percentage";
@@ -98,6 +105,27 @@ public class ProteinXML extends XMLElement{
     public void addComment(CommentXML comment){
         initCommentsTag();
         root.getChild(COMMENTS_TAG_NAME).addContent(comment.asJDomElement());
+    }
+    public void addProteinProteinOutgoingInteraction(ProteinXML prot){
+        initProteinProteinOutgoingInteractionsTag();
+        root.getChild(PROTEIN_PROTEIN_OUTGOING_INTERACTIONS_TAG_NAME).addContent(prot.asJDomElement());
+    }
+    public void addProteinProteinIncomingInteraction(ProteinXML prot){
+        initProteinProteinIncomingInteractionsTag();
+        root.getChild(PROTEIN_PROTEIN_INCOMING_INTERACTIONS_TAG_NAME).addContent(prot.asJDomElement());
+    }
+    
+    public void addProteinIsoformOutgoingInteraction(IsoformXML iso){
+        initProteinIsoformOutgoingInteractionsTag();
+        root.getChild(PROTEIN_ISOFORM_OUTGOING_INTERACTIONS_TAG_NAME).addContent(iso.asJDomElement());
+    }
+    public void addProteinIsoformIncomingInteraction(IsoformXML iso){
+        initProteinIsoformIncomingInteractionsTag();
+        root.getChild(PROTEIN_ISOFORM_INCOMING_INTERACTIONS_TAG_NAME).addContent(iso.asJDomElement());
+    }
+    public void addSubcellularLocation(SubcellularLocationXML subCell){
+        initSubcellularLocationsTag();
+        root.getChild(SUBCELLULAR_LOCATIONS_TAG_NAME).addContent(subCell.asJDomElement());
     }
     
     public List<KeywordXML> getKeywords() throws XMLElementException{
@@ -265,6 +293,36 @@ public class ProteinXML extends XMLElement{
         Element temp = root.getChild(COMMENTS_TAG_NAME);
         if(temp == null){
             root.addContent(new Element(COMMENTS_TAG_NAME));
+        }
+    }
+    private void initProteinProteinOutgoingInteractionsTag(){
+        Element temp = root.getChild(PROTEIN_PROTEIN_OUTGOING_INTERACTIONS_TAG_NAME);
+        if(temp == null){
+            root.addContent(new Element(PROTEIN_PROTEIN_OUTGOING_INTERACTIONS_TAG_NAME));
+        }
+    }
+    private void initProteinProteinIncomingInteractionsTag(){
+        Element temp = root.getChild(PROTEIN_PROTEIN_INCOMING_INTERACTIONS_TAG_NAME);
+        if(temp == null){
+            root.addContent(new Element(PROTEIN_PROTEIN_INCOMING_INTERACTIONS_TAG_NAME));
+        }
+    }
+    private void initProteinIsoformOutgoingInteractionsTag(){
+        Element temp = root.getChild(PROTEIN_ISOFORM_OUTGOING_INTERACTIONS_TAG_NAME);
+        if(temp == null){
+            root.addContent(new Element(PROTEIN_ISOFORM_OUTGOING_INTERACTIONS_TAG_NAME));
+        }
+    }
+    private void initProteinIsoformIncomingInteractionsTag(){
+        Element temp = root.getChild(PROTEIN_ISOFORM_INCOMING_INTERACTIONS_TAG_NAME);
+        if(temp == null){
+            root.addContent(new Element(PROTEIN_ISOFORM_INCOMING_INTERACTIONS_TAG_NAME));
+        }
+    }
+    private void initSubcellularLocationsTag(){
+        Element temp = root.getChild(SUBCELLULAR_LOCATIONS_TAG_NAME);
+        if(temp == null){
+            root.addContent(new Element(SUBCELLULAR_LOCATIONS_TAG_NAME));
         }
     }
 
