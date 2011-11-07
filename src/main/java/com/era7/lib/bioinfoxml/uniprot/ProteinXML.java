@@ -35,6 +35,7 @@ public class ProteinXML extends XMLElement{
     public static final String INTERPROS_TAG_NAME = "interpros";
     public static final String COMMENTS_TAG_NAME = "comments";
     public static final String SUBCELLULAR_LOCATIONS_TAG_NAME = "subcellular_locations";
+    public static final String ARTICLE_CITATIONS_TAG_NAME = "article_citations";
     
     public static final String SIGNAL_PEPTIDE_FEATURES = "signal_peptide_features";
     public static final String SPLICE_VARIANT_FEATURES = "splice_variant_features";
@@ -99,6 +100,10 @@ public class ProteinXML extends XMLElement{
     public String getOrganism(){    return getNodeText(ORGANISM_TAG_NAME);}
 
     
+    public void addArticleCitation(ArticleXML article){
+        initArticleCitationsTag();
+        root.getChild(ARTICLE_CITATIONS_TAG_NAME).addContent(article.asJDomElement());
+    }
     public void addSignalPeptideFeature(FeatureXML feature){
         initSignalPeptideTag();
         root.getChild(SIGNAL_PEPTIDE_FEATURES).addContent(feature.asJDomElement());
@@ -306,6 +311,7 @@ public class ProteinXML extends XMLElement{
     private void initActiveSiteTag(){ initTag(ACTIVE_SITE_FEATURES);  }
     private void initTransmembraneRegionTag(){ initTag(TRANSMEMBRANE_REGION_FEATURES);  }
     private void initSpliceVariantTag(){ initTag(SPLICE_VARIANT_FEATURES);  }
+    private void initArticleCitationsTag(){ initTag(ARTICLE_CITATIONS_TAG_NAME);  }
     
     private void initTag(String tagName){
         Element temp = root.getChild(tagName);
