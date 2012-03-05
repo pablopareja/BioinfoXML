@@ -20,6 +20,7 @@ public class AttributesXML extends XMLElement{
     public static final String CLASS_ATTRIBUTE = "class";
 
     public static final String NODE_CLASS = "node";
+    public static final String EDGE_CLASS = "edge";
 
     public AttributesXML(){
         super(new Element(TAG_NAME));

@@ -25,6 +25,7 @@ public class Bio4jRelationshipXML extends XMLElement{
     public static final String END_NODES_TAG_NAME = "end_nodes";
     public static final String INDEXES_TAG_NAME = "indexes";
     public static final String JAVADOC_URL_TAG_NAME = "javadoc_url";
+    public static final String NAME_PROPERTY_TAG_NAME = "name_property";
     
     public static final String RELATIONSHIP_ITEM_TYPE = "relationship";
     
@@ -49,6 +50,7 @@ public class Bio4jRelationshipXML extends XMLElement{
     public String getItemType(){    return getNodeText(ITEM_TYPE_TAG_NAME);}
     public String getRelationshipName( ){  return getNodeText(NAME_TAG_NAME);}
     public String getJavadocUrl(){    return getNodeText(JAVADOC_URL_TAG_NAME);}
+    public String getNameProperty(){    return getNodeText(NAME_PROPERTY_TAG_NAME);}
     
     public List<Bio4jNodeXML> getStartNodes() throws XMLElementException{
         LinkedList<Bio4jNodeXML> list = new LinkedList<Bio4jNodeXML>();
@@ -86,6 +88,7 @@ public class Bio4jRelationshipXML extends XMLElement{
     public void setRelationshipName(String value){  setNodeText(NAME_TAG_NAME, value);}
     public void setItemType(String value){  setNodeText(ITEM_TYPE_TAG_NAME, value);}
     public void setJavadocUrl(String value){    setNodeText(JAVADOC_URL_TAG_NAME, value);}
+    public void setNameProperty(String value){  setNodeText(NAME_PROPERTY_TAG_NAME, value);}
     
     public void addStartNode(Bio4jNodeXML node){
         Element elem = initStartNodesTag();

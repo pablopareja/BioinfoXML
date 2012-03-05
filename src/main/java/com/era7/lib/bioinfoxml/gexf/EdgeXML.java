@@ -25,6 +25,7 @@ public class EdgeXML extends XMLElement{
     public static final String END_ATTRIBUTE = "end";
 
     public static final String DIRECTED_TYPE = "directed";
+    public static final String UNDIRECTED_TYPE = "undirected";
 
     public EdgeXML(){
         super(new Element(TAG_NAME));
