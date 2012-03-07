@@ -22,26 +22,27 @@ import org.jdom.Element;
  *
  * @author Pablo Pareja Tobes <ppareja@era7.com>
  */
-public class Bio4jRelationshipIndexXML extends XMLElement{
+public class Bio4jPropertyXML extends XMLElement{
     
-    public static final String TAG_NAME = "relationship_index";
-    
+    public static final String TAG_NAME = "property";
+        
     public static final String NAME_TAG_NAME = "name";
-    public static final String RELATIONSHIP_NAME_TAG_NAME = "relationship_name";
-    public static final String ITEM_TYPE_TAG_NAME = "item_type";
+    public static final String TYPE_TAG_NAME = "type";
+    public static final String INDEXED_TAG_NAME = "indexed";
+    public static final String INDEX_NAME_TAG_NAME = "index_name";
+    public static final String INDEX_TYPE_TAG_NAME = "index_type";
     
-    public static final String RELATIONSHIP_INDEX_ITEM_TYPE = "relationship_index";
     
-    public Bio4jRelationshipIndexXML(){
+    public Bio4jPropertyXML(){
         super(new Element(TAG_NAME));
     }
-    public Bio4jRelationshipIndexXML(Element elem) throws XMLElementException{
+    public Bio4jPropertyXML(Element elem) throws XMLElementException{
         super(elem);
         if(!elem.getName().equals(TAG_NAME)){
             throw new XMLElementException(XMLElementException.WRONG_TAG_NAME,new XMLElement(elem));
         }
     }
-    public Bio4jRelationshipIndexXML(String value) throws Exception{
+    public Bio4jPropertyXML(String value) throws Exception{
         super(value);
         if(!root.getName().equals(TAG_NAME)){
             throw new XMLElementException(XMLElementException.WRONG_TAG_NAME,new XMLElement(value));
@@ -49,14 +50,19 @@ public class Bio4jRelationshipIndexXML extends XMLElement{
     }
         
     //----------------GETTERS---------------------
-    public String getRelationshipName( ){  return getNodeText(RELATIONSHIP_NAME_TAG_NAME);}
-    public String getIndexName( ){  return getNodeText(NAME_TAG_NAME);}
-    public String getItemType(){    return getNodeText(ITEM_TYPE_TAG_NAME);}
+    public String getPropertyName( ){  return getNodeText(NAME_TAG_NAME);}
+    public String getType(){    return getNodeText(TYPE_TAG_NAME);}
+    public String getIndexed(){ return getNodeText(INDEXED_TAG_NAME);}
+    public String getIndexName(){    return getNodeText(INDEX_NAME_TAG_NAME);}
+    public String getIndexType(){    return getNodeText(INDEX_TYPE_TAG_NAME);}
+   
     
     
     //----------------SETTERS-------------------
-    public void setRelationshipName(String value){  setNodeText(RELATIONSHIP_NAME_TAG_NAME, value);}
-    public void setIndexName(String value){  setNodeText(NAME_TAG_NAME, value);}
-    public void setItemType(String value){  setNodeText(ITEM_TYPE_TAG_NAME, value);}
+    public void setPropertyName(String value){  setNodeText(NAME_TAG_NAME, value);}
+    public void setType(String value){  setNodeText(TYPE_TAG_NAME, value);}
+    public void setIndexed(String value){   setNodeText(INDEXED_TAG_NAME, value);}
+    public void setIndexName(String value){    setNodeText(INDEX_NAME_TAG_NAME, value);}
+    public void setIndexType(String value){    setNodeText(INDEX_TYPE_TAG_NAME, value);}
     
 }

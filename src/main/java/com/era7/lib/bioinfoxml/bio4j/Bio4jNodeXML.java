@@ -34,7 +34,9 @@ public class Bio4jNodeXML extends XMLElement{
     public static final String INCOMING_RELATIONSHIPS_TAG_NAME = "in_rels";
     public static final String OUTGOING_RELATIONSHIPS_TAG_NAME = "out_rels";
     public static final String INDEXES_TAG_NAME = "indexes";
-    public static final String JAVADOC_URL_TAG_NAME = "javadoc_url";
+    public static final String PROPERTIES_TAG_NAME = "properties";
+    public static final String JAVADOC_URL_TAG_NAME = "javadoc_url";    
+    public static final String DATA_SOURCE_TAG_NAME = "data_source";
     
     public static final String NODE_ITEM_TYPE = "node";
     
@@ -59,6 +61,7 @@ public class Bio4jNodeXML extends XMLElement{
     public String getNodeName( ){  return getNodeText(NAME_TAG_NAME);}
     public String getItemType(){    return getNodeText(ITEM_TYPE_TAG_NAME);}
     public String getJavadocUrl(){    return getNodeText(JAVADOC_URL_TAG_NAME);}
+    public String getDataSource(){  return getNodeText(DATA_SOURCE_TAG_NAME);}
     
     public List<Bio4jRelationshipXML> getIncomingRelationships() throws XMLElementException{
         LinkedList<Bio4jRelationshipXML> list = new LinkedList<Bio4jRelationshipXML>();
@@ -96,6 +99,7 @@ public class Bio4jNodeXML extends XMLElement{
     public void setNodeName(String value){  setNodeText(NAME_TAG_NAME, value);}
     public void setItemType(String value){  setNodeText(ITEM_TYPE_TAG_NAME, value);}
     public void setJavadocUrl(String value){    setNodeText(JAVADOC_URL_TAG_NAME, value);}
+    public void setDataSource(String value){    setNodeText(DATA_SOURCE_TAG_NAME, value);}
     
     public void addIncomingRelationship(Bio4jRelationshipXML rel){
         Element elem = initIncomingRelationshipsTag();
@@ -108,6 +112,10 @@ public class Bio4jNodeXML extends XMLElement{
     public void addIndex(Bio4jNodeIndexXML index){
         Element elem = initIndexesTag();
         elem.addContent(index.getRoot());     
+    }
+    public void addProperty(Bio4jPropertyXML property){
+        Element elem = initPropertiesTag();
+        elem.addContent(property.getRoot());  
     }
     
     private Element initIncomingRelationshipsTag(){
@@ -130,6 +138,14 @@ public class Bio4jNodeXML extends XMLElement{
         Element elem = root.getChild(INDEXES_TAG_NAME);
         if(elem == null){
             elem = new Element(INDEXES_TAG_NAME);
+            root.addContent(elem);
+        }
+        return elem;
+    }
+    private Element initPropertiesTag(){
+        Element elem = root.getChild(PROPERTIES_TAG_NAME);
+        if(elem == null){
+            elem = new Element(PROPERTIES_TAG_NAME);
             root.addContent(elem);
         }
         return elem;
