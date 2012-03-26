@@ -44,7 +44,7 @@ public class Hsp extends XMLElement{
     public static final String QSEQ_TAG_NAME = "Hsp_qseq";
     public static final String HSEQ_TAG_NAME = "Hsp_hseq";
     public static final String MIDLINE_TAG_NAME = "Hsp_midline";
-
+    
     
     public Hsp(){
         super(new Element(TAG_NAME));
