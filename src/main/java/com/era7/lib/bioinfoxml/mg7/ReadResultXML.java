@@ -14,8 +14,11 @@
  */
 package com.era7.lib.bioinfoxml.mg7;
 
+import com.era7.lib.bioinfoxml.Hit;
 import com.era7.lib.era7xmlapi.model.XMLElement;
 import com.era7.lib.era7xmlapi.model.XMLElementException;
+import java.util.LinkedList;
+import java.util.List;
 import org.jdom.Element;
 
 /**
@@ -28,14 +31,9 @@ public class ReadResultXML extends XMLElement{
 
     public static final String READ_ID_TAG_NAME = "read_id";
     public static final String QUERY_LENGTH_TAG_NAME = "query_length";
-    public static final String HIT_LENGTH_TAG_NAME = "hit_length";
-    public static final String ALIGNMENT_LENGTH_TAG_NAME = "alignment_length";
-    public static final String IDENTITY_TAG_NAME = "identity";
-    public static final String EVALUE_TAG_NAME = "evalue";
-    public static final String QUERY_SEQUENCE_TAG_NAME = "query_sequence";
-    public static final String HIT_SEQUENCE_TAG_NAME = "hit_sequence";
-    public static final String MIDLINE_TAG_NAME = "midline";
-    public static final String GI_ID_TAG_NAME = "gi_id";
+    public static final String SEQUENCE_TAG_NAME = "sequence";
+        
+    public static final String HITS_TAG_NAME = "hits";
     
     public ReadResultXML(){
         super(new Element(TAG_NAME));
@@ -56,25 +54,39 @@ public class ReadResultXML extends XMLElement{
     //----------------GETTERS---------------------
     public String getReadId(){       return getNodeText(READ_ID_TAG_NAME);  }
     public int getQueryLength(){       return Integer.parseInt(getNodeText(QUERY_LENGTH_TAG_NAME));  }
-    public int getHitLength(){       return Integer.parseInt(getNodeText(HIT_LENGTH_TAG_NAME));  }
-    public int getAlignmentLength(){       return Integer.parseInt(getNodeText(ALIGNMENT_LENGTH_TAG_NAME));  }
-    public int getIdentity(){    return Integer.parseInt(getNodeText(IDENTITY_TAG_NAME));}
-    public String getEvalue(){  return getNodeText(EVALUE_TAG_NAME);}
-    public String getQuerySequence(){  return getNodeText(QUERY_SEQUENCE_TAG_NAME);}
-    public String getHitSequence(){ return getNodeText(HIT_SEQUENCE_TAG_NAME);}
-    public String getMidline(){ return getNodeText(MIDLINE_TAG_NAME);}
-    public int getGiId(){    return Integer.parseInt(getNodeText(GI_ID_TAG_NAME));}
+    public String getSequence(){    return getNodeText(SEQUENCE_TAG_NAME);}
+    
+    
+    public List<Hit> getHits() throws XMLElementException{
+        
+        Element elem = initHitsTag();
+        List<Hit> resultList = new LinkedList<Hit>();
+        List<Element> tempList = elem.getChildren(Hit.TAG_NAME);
+        for (Element element : tempList) {
+            resultList.add(new Hit(element));
+        }
+        return resultList;      
+        
+    } 
+    
+    public void addHit(Hit hit){
+        Element hits = initHitsTag();
+        hits.addContent(hit.getRoot());
+    }
 
     //----------------SETTERS---------------------
-    public void setReadId(String type){    setNodeText(READ_ID_TAG_NAME, type);}
-    public void setQueryLength(int value){  setNodeText(QUERY_LENGTH_TAG_NAME, String.valueOf(value));}
-    public void setHitLength(int value){  setNodeText(HIT_LENGTH_TAG_NAME, String.valueOf(value));}
-    public void setAlignmentLength(int value){  setNodeText(ALIGNMENT_LENGTH_TAG_NAME, String.valueOf(value));}
-    public void setIdentity(int value){  setNodeText(IDENTITY_TAG_NAME, String.valueOf(value));}
-    public void setEvalue(String value){  setNodeText(EVALUE_TAG_NAME, value);}
-    public void setQuerySequence(String type){    setNodeText(QUERY_SEQUENCE_TAG_NAME, type);}
-    public void setHitSequence(String value){  setNodeText(HIT_SEQUENCE_TAG_NAME, value);}
-    public void setMidline(String value){  setNodeText(MIDLINE_TAG_NAME, value);}
-    public void setGiId(int value){  setNodeText(GI_ID_TAG_NAME, String.valueOf(value));}
+    public void setReadId(String value){    setNodeText(READ_ID_TAG_NAME, value);}
+    public void setQueryLength(int value){  setNodeText(QUERY_LENGTH_TAG_NAME, String.valueOf(value));}    
+    public void setSequence(String value){  setNodeText(SEQUENCE_TAG_NAME, value);}
+    
+    
+    protected Element initHitsTag(){
+        Element elem = this.root.getChild(HITS_TAG_NAME);
+        if(elem == null){
+            root.addContent(new Element(HITS_TAG_NAME));
+            elem = this.root.getChild(HITS_TAG_NAME);
+        }
+        return elem;
+    }
     
 }
