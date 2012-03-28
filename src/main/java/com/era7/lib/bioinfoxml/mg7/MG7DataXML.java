@@ -24,7 +24,7 @@ import org.jdom.Element;
  */
 public class MG7DataXML extends XMLElement{
 
-    public static final String TAG_NAME = "metagenomica_data";
+    public static final String TAG_NAME = "mg7_data";
     
     public static final String QUEUE_NAME_TAG_NAME = "queue_name";
     public static final String READS_PER_FILE_TAG_NAME = "reads_per_file";
