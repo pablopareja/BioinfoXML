@@ -33,6 +33,7 @@ public class EdgeXML extends XMLElement{
     public static final String TYPE_ATTRIBUTE = "type";
     public static final String START_ATTRIBUTE = "start";
     public static final String END_ATTRIBUTE = "end";
+    public static final String WEIGHT_ATTRIBUTE = "weight";
 
     public static final String DIRECTED_TYPE = "directed";
     public static final String UNDIRECTED_TYPE = "undirected";
@@ -72,6 +73,9 @@ public class EdgeXML extends XMLElement{
     public void setEnd(String value){
         this.root.setAttribute(END_ATTRIBUTE, value);
     }
+    public void setWeight(double value){
+        this.root.setAttribute(WEIGHT_ATTRIBUTE, String.valueOf(value));
+    }
 
     //----------------GETTERS-------------------
     public String getId(){
@@ -91,6 +95,9 @@ public class EdgeXML extends XMLElement{
     }
     public String getEnd(){
         return this.root.getAttributeValue(END_ATTRIBUTE);
+    }
+    public double getWeight(){
+        return Double.parseDouble(this.root.getAttributeValue(WEIGHT_ATTRIBUTE));
     }
 
 

@@ -61,7 +61,9 @@ public class MG7DataXML extends XMLElement{
     public static final String ERRORS_SNS_TOPIC_ARN_TAG_NAME = "errors_sns_topic_arn";
         
     public static final String RESULTS_DB_FOLDER = "results_db_folder";
-    public static final String MLM_CONFIG_PROPS_TAG_NAME = "mlm_config_props";
+    
+    public static final String STORE_HITS_TAG_NAME = "store_hits";
+    public static final String STORE_HSPS_TAG_NAME = "store_hsps";
     
     public MG7DataXML(){
         super(new Element(TAG_NAME));
@@ -105,7 +107,8 @@ public class MG7DataXML extends XMLElement{
     public void setErrorsSNSTopicName(String value){    setNodeText(ERRORS_SNS_TOPIC_NAME_TAG_NAME, value);}
     public void setErrorsSNSTopicArn(String value){ setNodeText(ERRORS_SNS_TOPIC_ARN_TAG_NAME, value);}
     public void setResultsDBFolder(String value){   setNodeText(RESULTS_DB_FOLDER, value);}
-    public void setMLMConfigProps(String value){   setNodeText(MLM_CONFIG_PROPS_TAG_NAME, value);}
+    public void setStoreHits(Boolean value){ setNodeText(STORE_HITS_TAG_NAME, String.valueOf(value));}
+    public void setStoreHsps(Boolean value){ setNodeText(STORE_HSPS_TAG_NAME, String.valueOf(value));}
     
     //----------------GETTERS---------------------
     public String getQueueName(){       return getNodeText(QUEUE_NAME_TAG_NAME);  }
@@ -133,6 +136,7 @@ public class MG7DataXML extends XMLElement{
     public String getErrorsSNSTopicName(){  return getNodeText(ERRORS_SNS_TOPIC_NAME_TAG_NAME);}
     public String getErrorsSNSTopicArn(){  return getNodeText(ERRORS_SNS_TOPIC_ARN_TAG_NAME);}
     public String getResultsDBFolder(){ return getNodeText(RESULTS_DB_FOLDER);}
-    public String getMLMConfigProps(){ return getNodeText(MLM_CONFIG_PROPS_TAG_NAME);}
+    public boolean getStoreHits(){  return Boolean.parseBoolean(getNodeText(STORE_HITS_TAG_NAME));}
+    public boolean getStoreHsps(){  return Boolean.parseBoolean(getNodeText(STORE_HSPS_TAG_NAME));}
     
 }
