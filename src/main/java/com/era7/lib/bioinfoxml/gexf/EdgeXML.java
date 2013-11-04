@@ -1,6 +1,16 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2010-2012  "Oh no sequences!"
+ *
+ * This is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
 package com.era7.lib.bioinfoxml.gexf;
@@ -23,8 +33,10 @@ public class EdgeXML extends XMLElement{
     public static final String TYPE_ATTRIBUTE = "type";
     public static final String START_ATTRIBUTE = "start";
     public static final String END_ATTRIBUTE = "end";
+    public static final String WEIGHT_ATTRIBUTE = "weight";
 
     public static final String DIRECTED_TYPE = "directed";
+    public static final String UNDIRECTED_TYPE = "undirected";
 
     public EdgeXML(){
         super(new Element(TAG_NAME));
@@ -61,6 +73,9 @@ public class EdgeXML extends XMLElement{
     public void setEnd(String value){
         this.root.setAttribute(END_ATTRIBUTE, value);
     }
+    public void setWeight(double value){
+        this.root.setAttribute(WEIGHT_ATTRIBUTE, String.valueOf(value));
+    }
 
     //----------------GETTERS-------------------
     public String getId(){
@@ -80,6 +95,9 @@ public class EdgeXML extends XMLElement{
     }
     public String getEnd(){
         return this.root.getAttributeValue(END_ATTRIBUTE);
+    }
+    public double getWeight(){
+        return Double.parseDouble(this.root.getAttributeValue(WEIGHT_ATTRIBUTE));
     }
 
 

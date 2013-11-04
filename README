@@ -1,4 +1,4 @@
-Era7BioinfoXML is a set of XML wrapper classes based on Jdom library (http://www.jdom.org)
+BioinfoXML is a set of XML wrapper classes based on Jdom library (http://www.jdom.org)
 modelling a set of general utility entities for bioinformatics.
 
 Library jars can be found at 'releases' folder.

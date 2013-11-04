@@ -1,6 +1,16 @@
 /*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright (C) 2010-2012  "Oh no sequences!"
+ *
+ * This is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as
+ * published by the Free Software Foundation, either version 3 of the
+ * License, or (at your option) any later version.
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>
  */
 
 package com.era7.lib.bioinfoxml.uniprot;
@@ -34,6 +44,19 @@ public class ProteinXML extends XMLElement{
     public static final String KEYWORDS_TAG_NAME = "keywords";
     public static final String INTERPROS_TAG_NAME = "interpros";
     public static final String COMMENTS_TAG_NAME = "comments";
+    public static final String SUBCELLULAR_LOCATIONS_TAG_NAME = "subcellular_locations";
+    public static final String ARTICLE_CITATIONS_TAG_NAME = "article_citations";
+    
+    public static final String SIGNAL_PEPTIDE_FEATURES = "signal_peptide_features";
+    public static final String SPLICE_VARIANT_FEATURES = "splice_variant_features";
+    public static final String TRANSMEMBRANE_REGION_FEATURES = "transmembrane_region_features";
+    public static final String ACTIVE_SITE_FEATURES = "active_site_features";
+    
+    public static final String PROTEIN_PROTEIN_OUTGOING_INTERACTIONS_TAG_NAME = "protein_protein_outgoing_interactions";
+    public static final String PROTEIN_PROTEIN_INCOMING_INTERACTIONS_TAG_NAME = "protein_protein_incoming_interactions";
+    public static final String PROTEIN_ISOFORM_OUTGOING_INTERACTIONS_TAG_NAME = "protein_isoform_outgoing_interactions";
+    public static final String PROTEIN_ISOFORM_INCOMING_INTERACTIONS_TAG_NAME = "protein_isoform_incoming_interactions";
+    
     
     public static final String PROTEIN_COVERAGE_ABSOLUTE = "protein_coverage_absolute";
     public static final String PROTEIN_COVERAGE_PERCENTAGE = "protein_coverage_percentage";
@@ -87,6 +110,26 @@ public class ProteinXML extends XMLElement{
     public String getOrganism(){    return getNodeText(ORGANISM_TAG_NAME);}
 
     
+    public void addArticleCitation(ArticleXML article){
+        initArticleCitationsTag();
+        root.getChild(ARTICLE_CITATIONS_TAG_NAME).addContent(article.asJDomElement());
+    }
+    public void addSignalPeptideFeature(FeatureXML feature){
+        initSignalPeptideTag();
+        root.getChild(SIGNAL_PEPTIDE_FEATURES).addContent(feature.asJDomElement());
+    }
+    public void addSpliceVariantFeature(FeatureXML feature){
+        initSpliceVariantTag();
+        root.getChild(SPLICE_VARIANT_FEATURES).addContent(feature.asJDomElement());
+    }
+    public void addTransmembraneRegionFeature(FeatureXML feature){
+        initTransmembraneRegionTag();
+        root.getChild(TRANSMEMBRANE_REGION_FEATURES).addContent(feature.asJDomElement());
+    }
+    public void addActiveSiteFeature(FeatureXML feature){
+        initActiveSiteTag();
+        root.getChild(ACTIVE_SITE_FEATURES).addContent(feature.asJDomElement());
+    }
     public void addKeyword(KeywordXML keyword){
         initKeywordsTag();
         root.getChild(KEYWORDS_TAG_NAME).addContent(keyword.asJDomElement());
@@ -98,6 +141,27 @@ public class ProteinXML extends XMLElement{
     public void addComment(CommentXML comment){
         initCommentsTag();
         root.getChild(COMMENTS_TAG_NAME).addContent(comment.asJDomElement());
+    }
+    public void addProteinProteinOutgoingInteraction(ProteinXML prot){
+        initProteinProteinOutgoingInteractionsTag();
+        root.getChild(PROTEIN_PROTEIN_OUTGOING_INTERACTIONS_TAG_NAME).addContent(prot.asJDomElement());
+    }
+    public void addProteinProteinIncomingInteraction(ProteinXML prot){
+        initProteinProteinIncomingInteractionsTag();
+        root.getChild(PROTEIN_PROTEIN_INCOMING_INTERACTIONS_TAG_NAME).addContent(prot.asJDomElement());
+    }
+    
+    public void addProteinIsoformOutgoingInteraction(IsoformXML iso){
+        initProteinIsoformOutgoingInteractionsTag();
+        root.getChild(PROTEIN_ISOFORM_OUTGOING_INTERACTIONS_TAG_NAME).addContent(iso.asJDomElement());
+    }
+    public void addProteinIsoformIncomingInteraction(IsoformXML iso){
+        initProteinIsoformIncomingInteractionsTag();
+        root.getChild(PROTEIN_ISOFORM_INCOMING_INTERACTIONS_TAG_NAME).addContent(iso.asJDomElement());
+    }
+    public void addSubcellularLocation(SubcellularLocationXML subCell){
+        initSubcellularLocationsTag();
+        root.getChild(SUBCELLULAR_LOCATIONS_TAG_NAME).addContent(subCell.asJDomElement());
     }
     
     public List<KeywordXML> getKeywords() throws XMLElementException{
@@ -221,12 +285,8 @@ public class ProteinXML extends XMLElement{
 
     }
 
-    private void initGoTermsTag(){
-        Element goTerms = root.getChild(GO_TERMS_TAG_NAME);
-        if(goTerms == null){
-            root.addContent(new Element(GO_TERMS_TAG_NAME));
-        }
-    }
+    private void initGoTermsTag(){  initTag(GO_TERMS_TAG_NAME); }
+    
     private void initComponentTag(){
         initGoTermsTag();
         Element temp = root.getChild(GO_TERMS_TAG_NAME).getChild(COMPONENT_GO_TERMS_TAG_NAME);
@@ -249,22 +309,24 @@ public class ProteinXML extends XMLElement{
         }
     }
     
-    private void initKeywordsTag(){
-        Element temp = root.getChild(KEYWORDS_TAG_NAME);
+    private void initKeywordsTag(){ initTag(KEYWORDS_TAG_NAME); }
+    private void initInterprosTag(){    initTag(INTERPROS_TAG_NAME);  }
+    private void initCommentsTag(){ initTag(COMMENTS_TAG_NAME);}
+    private void initProteinProteinOutgoingInteractionsTag(){   initTag(PROTEIN_PROTEIN_OUTGOING_INTERACTIONS_TAG_NAME);}
+    private void initProteinProteinIncomingInteractionsTag(){   initTag(PROTEIN_PROTEIN_INCOMING_INTERACTIONS_TAG_NAME);}
+    private void initProteinIsoformOutgoingInteractionsTag(){   initTag(PROTEIN_ISOFORM_OUTGOING_INTERACTIONS_TAG_NAME);}
+    private void initProteinIsoformIncomingInteractionsTag(){   initTag(PROTEIN_ISOFORM_INCOMING_INTERACTIONS_TAG_NAME);}    
+    private void initSubcellularLocationsTag(){ initTag(SUBCELLULAR_LOCATIONS_TAG_NAME);}
+    private void initSignalPeptideTag(){ initTag(SIGNAL_PEPTIDE_FEATURES);  }
+    private void initActiveSiteTag(){ initTag(ACTIVE_SITE_FEATURES);  }
+    private void initTransmembraneRegionTag(){ initTag(TRANSMEMBRANE_REGION_FEATURES);  }
+    private void initSpliceVariantTag(){ initTag(SPLICE_VARIANT_FEATURES);  }
+    private void initArticleCitationsTag(){ initTag(ARTICLE_CITATIONS_TAG_NAME);  }
+    
+    private void initTag(String tagName){
+        Element temp = root.getChild(tagName);
         if(temp == null){
-            root.addContent(new Element(KEYWORDS_TAG_NAME));
-        }
-    }
-    private void initInterprosTag(){
-        Element temp = root.getChild(INTERPROS_TAG_NAME);
-        if(temp == null){
-            root.addContent(new Element(INTERPROS_TAG_NAME));
-        }
-    }
-    private void initCommentsTag(){
-        Element temp = root.getChild(COMMENTS_TAG_NAME);
-        if(temp == null){
-            root.addContent(new Element(COMMENTS_TAG_NAME));
+            root.addContent(new Element(tagName));
         }
     }
 
